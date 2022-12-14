@@ -37,7 +37,7 @@ XAFS20221212でのエクセルファイルは[こちら](./draft/20221212/metada
 
 ## メタデータスキーマ確認
 
-メタデータスキーマ確認についてですが、以下を用いた方法をそれぞれご紹介します。
+メタデータスキーマ確認についてですが、以下に方法をそれぞれご紹介します。
 
 - [Visual Studio Codeを用いた方法 (YAML)](./README_vscode.md)
 - [Pythonを用いた方法 (YAML/Python)](./README_python.md)
