@@ -123,7 +123,7 @@
         },
         "@data_info@data_depositor@name":{
             "$id":"#key/@data_info@data_depositor@name",
-            "description":"データ登録者の名前\nname of data depositor\nSupplement: analyst, manager, director",
+            "description":"データ登録者の名前\nname of data depositor",
             "title":"@data_info@data_depositor@name",
             "examples":[
                 "Taro KEK"
@@ -135,6 +135,11 @@
             "title":"@data_info@data_depositor@role",
             "examples":[
                 "analyst"
+            ],
+            "enum":[
+                "analyst",
+                "manager",
+                "director"
             ]
         },
         "@data_info@contact_name":{
@@ -192,6 +197,11 @@
             "title":"@data_info@contact_name@role",
             "examples":[
                 "responsible"
+            ],
+            "enum":[
+                "contractor",
+                "principal investigator",
+                "head of the institution"
             ]
         },
         "@data_info@access_rights":{
