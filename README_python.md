@@ -19,7 +19,8 @@ condaを利用した場合、以下の手順で行います。
 config.yml に指定するスキーマファイル (or URL)を指定します。
 
 ```yaml
-schema_path: ./draft/20221212/xafs-schema.json
+schema_path: https://raw.githubusercontent.com/matumot/xafs-schema/main/draft/20221212/xafs-schema.json
+#schema_path: ./draft/20221212/xafs-schema.json
 #schema_path: ./draft/202221212/xafs-schema-none-ok.json
 ```
 
