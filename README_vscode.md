@@ -26,7 +26,7 @@ Visual Studio Codeを起動し、左下の Extensionsをクリックし、左上
 ```
 {
     "yaml.schemas": {
-        "https://raw.githubusercontent.com/matumot/xafs-schema/main/draft/20221212/xafs-metadata.json": [
+        "https://raw.githubusercontent.com/matumot/xafs-schema/main/draft/20221212/xafs-schema.json": [
             "*xafs*.yml"
         ]
     }
