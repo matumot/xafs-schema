@@ -487,7 +487,7 @@
         },
         "@facility@light_source@type":{
             "$id":"#key/@facility@light_source@type",
-            "description":"光源の種類\nlight source type",
+            "description":"光源の種類\nlight source type\nSupplement: BM,U,W",
             "title":"@facility@light_source@type",
             "examples":[
                 "BM"
@@ -618,7 +618,7 @@
         },
         "@files.columns.column_type":{
             "$id":"#key/@files.columns.column_type",
-            "description":"コラムの種類 (raw,processed)\ncolumn type (raw,processed)",
+            "description":"コラムの種類 (raw,processed)\ncolumn type (raw,processed)\nSupplement: raw,processed",
             "title":"@files.columns.column_type",
             "examples":[
                 "raw"
@@ -2579,7 +2579,7 @@
         },
         "@sample@phase":{
             "$id":"#key/@sample@phase",
-            "description":"サンプルの相\nphase of sample",
+            "description":"サンプルの相\nphase of sample\nSupplement: gas,solid,liquid,film",
             "title":"@sample@phase",
             "examples":[
                 "solid"
@@ -2640,7 +2640,7 @@
         },
         "@sample@shape@size@type":{
             "$id":"#key/@sample@shape@size@type",
-            "description":"サンプルサイズのタイプ\nsample size type",
+            "description":"サンプルサイズのタイプ\nsample size type\nSupplement: diameter,radius,thickness",
             "title":"@sample@shape@size@type",
             "examples":[
                 "diameter"
@@ -2811,7 +2811,7 @@
         },
         "@reference@phase":{
             "$id":"#key/@reference@phase",
-            "description":"[Reference] サンプルの相\n[Reference] phase of sample",
+            "description":"[Reference] サンプルの相\n[Reference] phase of sample\nSupplement: gas,solid,liquid,film",
             "title":"@reference@phase",
             "examples":[
                 "film"
@@ -2872,7 +2872,7 @@
         },
         "@reference@shape@size@type":{
             "$id":"#key/@reference@shape@size@type",
-            "description":"[Reference] サンプルサイズのタイプ\n[Reference] sample size type",
+            "description":"[Reference] サンプルサイズのタイプ\n[Reference] sample size type\nSupplement: diameter,radius,thickness",
             "title":"@reference@shape@size@type",
             "examples":[
                 "diameter"
@@ -3012,7 +3012,7 @@
         },
         "@conditions@condition.types.type":{
             "$id":"#key/@conditions@condition.types.type",
-            "description":"コンディションタイプ\ncondition type",
+            "description":"コンディションタイプ\ncondition type\nSupplement: atmosphere,voltage,current,coordinate,optical, thermal,mechanical,polarization",
             "title":"@conditions@condition.types.type",
             "enum":[
                 "atmosphere",
