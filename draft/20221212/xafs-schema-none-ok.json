@@ -193,7 +193,7 @@
         },
         "@data_info@contact_name@role":{
             "$id":"#key/@data_info@contact_name@role",
-            "description":"データ責任者の役割\nrole of data contact name\nSupplement: contractor, principal investigator, head of the institution",
+            "description":"データ責任者の役割\nrole of data contact name\nSupplement: contractor, principal investigator, head of the institution,responsible",
             "title":"@data_info@contact_name@role",
             "examples":[
                 "responsible"
@@ -201,7 +201,8 @@
             "enum":[
                 "contractor",
                 "principal investigator",
-                "head of the institution"
+                "head of the institution",
+                "responsible"
             ]
         },
         "@data_info@access_rights":{
