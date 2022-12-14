@@ -101,7 +101,6 @@
             "title":"@data_info@data_depositor",
             "required":[
                 "organization",
-                "affiliation",
                 "name",
                 "role"
             ]
@@ -159,7 +158,6 @@
             "title":"@data_info@contact_name",
             "required":[
                 "organization",
-                "affiliation",
                 "name",
                 "role"
             ]
