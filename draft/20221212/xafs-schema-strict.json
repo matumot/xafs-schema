@@ -131,7 +131,7 @@
         },
         "@data_info@data_depositor@role":{
             "$id":"#key/@data_info@data_depositor@role",
-            "description":"データ登録者の役割\nrole of data depositor\nSupplement:\nanalyst, manager, director\nEnum:\nanalyst, manager, director",
+            "description":"データ登録者の役割\nrole of data depositor\nEnum:\nanalyst, manager, director",
             "title":"@data_info@data_depositor@role",
             "examples":[
                 "analyst"
@@ -193,7 +193,7 @@
         },
         "@data_info@contact_name@role":{
             "$id":"#key/@data_info@contact_name@role",
-            "description":"データ責任者の役割\nrole of data contact name\nSupplement:\ncontractor, principal investigator, head of the institution,responsible\nEnum:\ncontractor, principal investigator, head of the institution,responsible",
+            "description":"データ責任者の役割\nrole of data contact name\nEnum:\ncontractor, principal investigator, head of the institution,responsible",
             "title":"@data_info@contact_name@role",
             "examples":[
                 "responsible"
@@ -503,7 +503,7 @@
         },
         "@facility@light_source@type":{
             "$id":"#key/@facility@light_source@type",
-            "description":"光源の種類\nlight source type\nSupplement:\nBM,U,W\nEnum:\nBM,U,W",
+            "description":"光源の種類\nlight source type\nEnum:\nBM,U,W",
             "title":"@facility@light_source@type",
             "examples":[
                 "BM"
@@ -631,7 +631,7 @@
         },
         "@files.columns.column_type":{
             "$id":"#key/@files.columns.column_type",
-            "description":"コラムの種類 (raw,processed)\ncolumn type (raw,processed)\nSupplement:\nraw,processed\nEnum:\nraw,processed",
+            "description":"コラムの種類 (raw,processed)\ncolumn type (raw,processed)\nEnum:\nraw,processed",
             "title":"@files.columns.column_type",
             "examples":[
                 "raw"
@@ -2558,7 +2558,7 @@
         },
         "@sample@phase":{
             "$id":"#key/@sample@phase",
-            "description":"サンプルの相\nphase of sample\nSupplement:\ngas,solid,liquid,film\nEnum:\ngas,solid,liquid,film",
+            "description":"サンプルの相\nphase of sample\nEnum:\ngas,solid,liquid,film",
             "title":"@sample@phase",
             "examples":[
                 "solid"
@@ -2619,7 +2619,7 @@
         },
         "@sample@shape@size@type":{
             "$id":"#key/@sample@shape@size@type",
-            "description":"サンプルサイズのタイプ\nsample size type\nSupplement:\ndiameter,radius,thickness\nEnum:\ndiameter,radius,thickness",
+            "description":"サンプルサイズのタイプ\nsample size type\nEnum:\ndiameter,radius,thickness",
             "title":"@sample@shape@size@type",
             "examples":[
                 "diameter"
@@ -2788,7 +2788,7 @@
         },
         "@reference@phase":{
             "$id":"#key/@reference@phase",
-            "description":"[Reference] サンプルの相\n[Reference] phase of sample\nSupplement:\ngas,solid,liquid,film\nEnum:\ngas,solid,liquid,film",
+            "description":"[Reference] サンプルの相\n[Reference] phase of sample\nEnum:\ngas,solid,liquid,film",
             "title":"@reference@phase",
             "examples":[
                 "film"
@@ -2849,7 +2849,7 @@
         },
         "@reference@shape@size@type":{
             "$id":"#key/@reference@shape@size@type",
-            "description":"[Reference] サンプルサイズのタイプ\n[Reference] sample size type\nSupplement:\ndiameter,radius,thickness\nEnum:\ndiameter,radius,thickness",
+            "description":"[Reference] サンプルサイズのタイプ\n[Reference] sample size type\nEnum:\ndiameter,radius,thickness",
             "title":"@reference@shape@size@type",
             "examples":[
                 "diameter"
@@ -2985,7 +2985,7 @@
         },
         "@conditions@condition.types.type":{
             "$id":"#key/@conditions@condition.types.type",
-            "description":"コンディションタイプ\ncondition type\nSupplement:\natmosphere,voltage,current,coordinate,optical, thermal,mechanical,polarization\nEnum:\natmosphere,voltage,current,coordinate,optical, thermal,mechanical,polarization",
+            "description":"コンディションタイプ\ncondition type\nEnum:\natmosphere,voltage,current,coordinate,optical, thermal,mechanical,polarization",
             "title":"@conditions@condition.types.type",
             "enum":[
                 "atmosphere",
