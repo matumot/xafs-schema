@@ -22,11 +22,14 @@ condaを利用した場合、以下の手順で行います。
 (xafs-schema) >python generate_xafs_schema.py draft/20221212/metadata_schema-xafs.xlsx
 ... input draft/20221212/metadata_schema-xafs.xlsx
 ... output ./schema/xafs-schema.json
-... output ./schema/xafs-schema-none-ok.json
+... output ./schema/xafs-schema-strict.json
 ```
 
 * xafs-schema.json
   * metadata_schema-xafs.xls に従って作成された jsonschemaファイルです。 
-* xafs-schema-none-ok.json　　**利用は非推奨**
-  * 同様に、metadata_schema-xafs.xls に従って作成された jsonschemaファイルですが、数値が指定されたメタデータで値を入力しなくても (None）エラーが発生しないようになっています。
+  * データ型のチェックは緩くなっています。 (数値・文字列の区別なし、空欄もOK)
+* xafs-schema-strict.json
+  * 同様に、metadata_schema-xafs.xls に従って作成された jsonschemaファイルです。
+  * データ型のチェックも行います。
+  * 標準試料データなど信頼度の高いデータに対してはこちらのスキーマ利用を推奨します。
 

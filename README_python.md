@@ -20,9 +20,17 @@ config.yml に指定するスキーマファイル (or URL)を指定します。
 
 ```yaml
 schema_path: https://raw.githubusercontent.com/matumot/xafs-schema/main/draft/20221212/xafs-schema.json
+#schema_path: https://raw.githubusercontent.com/matumot/xafs-schema/main/draft/20221212/xafs-schema-strict.json
 #schema_path: ./draft/20221212/xafs-schema.json
-#schema_path: ./draft/202221212/xafs-schema-none-ok.json
+#schema_path: ./draft/202221212/xafs-schema-strict.json
 ```
+
+各スキーマファイルは以下の仕様になっています。
+
+| スキーマファイル        | 説明                                                         |
+| ----------------------- | ------------------------------------------------------------ |
+| xafs-schema.json        | データ型のチェックは緩くなっています。 (数値・文字列の区別なし、空欄もOK) |
+| xafs-schema-strict.json | データ型のチェックも行います。 標準試料データなど信頼度の高いデータに対してはこちらのスキーマ利用を推奨します。 |
 
 
 
@@ -56,11 +64,6 @@ schema_path: https://raw.githubusercontent.com/matumot/xafs-schema/main/draft/20
             "[instrument.monochromator.detail.groove_density] None is not of type 'number'",
             "[instrument.monochromator.detail.groove_depth] None is not of type 'number'",
             "[instrument.monochromator.detail.groove_deviation_angle] None is not of type 'number'",
-            "[measurement.I0.ammeters.gain] '10^6' is not of type 'number'",
-            "[measurement.detector.0.processing_lines.0.conversion_factor.value] '1e8' is not of type 'number'",
-            "[measurement.detector.0.processing_lines.0.processors.0.gain.value] '1e6' is not of type 'number'",
-            "[measurement.detector.0.processing_lines.0.processors.0.time_constant.value] '1e-3' is not of type 'number'",
-            "[measurement.detector.0.processing_lines.0.processors.1.gain.value] '1e8' is not of type 'number'",
             "[measurement.section.blocks.block.0.dwell_time] None is not of type 'number'",
             "[measurement.tune.tune_energy] None is not of type 'number'",
             "[sample.shape.size.value] '2-5' is not of type 'number'"

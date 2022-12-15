@@ -12,6 +12,7 @@ import jsonschema
 import urllib
 import yaml
 import codecs
+import re
 
 from logging import getLogger, StreamHandler, DEBUG
 
@@ -28,6 +29,7 @@ class Error(BaseException):
     """
     エラークラス
     """
+
     def __init__(self, message, flag_print=True):
         self.__message = message
 
@@ -46,9 +48,23 @@ def load_yaml(filename):
     yaml.add_constructor(yaml.resolver.BaseResolver.DEFAULT_MAPPING_TAG,
                          lambda loader, node: collections.OrderedDict(loader.construct_pairs(node)))
 
+    loader = yaml.SafeLoader
+    # lodaerを編集 (指数表記をfloatと柔軟に認識させるため)
+    # Ref.: https://stackoverflow.com/questions/30458977/yaml-loads-5e-6-as-string-and-not-a-number
+    loader.add_implicit_resolver(
+        u'tag:yaml.org,2002:float',
+        re.compile(u'''^(?:
+     [-+]?(?:[0-9][0-9_]*)\\.[0-9_]*(?:[eE][-+]?[0-9]+)?
+    |[-+]?(?:[0-9][0-9_]*)(?:[eE][-+]?[0-9]+)
+    |\\.[0-9_]+(?:[eE][-+][0-9]+)?
+    |[-+]?[0-9][0-9_]*(?::[0-5]?[0-9])+\\.[0-9_]*
+    |[-+]?\\.(?:inf|Inf|INF)
+    |\\.(?:nan|NaN|NAN))$''', re.X),
+        list(u'-+0123456789.'))
+
     vdict = collections.OrderedDict()
     with codecs.open(filename, "r", "utf-8") as f:
-        vdict = yaml.load(f, Loader=yaml.SafeLoader)
+        vdict = yaml.load(f, Loader=loader)
     return vdict
 
 

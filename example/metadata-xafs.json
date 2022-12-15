@@ -87,7 +87,13 @@
                 "crystal_material": "Si",
                 "crystal_plane": 111,
                 "crystal_d": 1.63747,
-                "crystal_d_unit": "angstrom"
+                "crystal_d_unit": "angstrom",
+                "groove_deviation_angle": null,
+                "groove_deviation_angle_unit": null,
+                "groove_density": null,
+                "groove_density_unit": null,
+                "groove_depth": null,
+                "groove_depth_unit": null
             }
         },
         "mirrors": {
@@ -285,6 +291,8 @@
             "tune_type": "single",
             "tune_angle": 46,
             "tune_angle_unit": "deg",
+            "tune_energy": null,
+            "tune_energy_unit": null,
             "tune_ratio": 80,
             "tune_ratio_unit": "%"
         },
@@ -301,6 +309,8 @@
                         "delta_unit": "eV",
                         "wait_time": 1,
                         "wait_time_unit": "s",
+                        "dwell_time": null,
+                        "dwell_time_unit": null,
                         "sampling_number": 21
                     }
                 ],

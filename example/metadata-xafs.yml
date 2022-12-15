@@ -73,12 +73,12 @@ instrument:
       crystal_plane: 111
       crystal_d: 1.63747
       crystal_d_unit: angstrom
-#      groove_deviation_angle:
-#      groove_deviation_angle_unit:
-#      groove_density:
-#      groove_density_unit:
-#      groove_depth:
-#      groove_depth_unit:
+      groove_deviation_angle:
+      groove_deviation_angle_unit:
+      groove_density:
+      groove_density_unit:
+      groove_depth:
+      groove_depth_unit:
 
   mirrors:
     mirror:
@@ -223,8 +223,8 @@ measurement:
     tune_type: single
     tune_angle: 46
     tune_angle_unit: deg
-#    tune_energy:
-#    tune_energy_unit:
+    tune_energy:
+    tune_energy_unit:
     tune_ratio: 80
     tune_ratio_unit: '%'
 
@@ -240,8 +240,8 @@ measurement:
         delta_unit: eV
         wait_time: 1
         wait_time_unit: s
-#        dwell_time:
-#        dwell_time_unit:
+        dwell_time:
+        dwell_time_unit:
         sampling_number: 21
       data_points: 294    # Total number of data points
   chamber_environment: He

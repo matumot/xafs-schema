@@ -21,7 +21,9 @@ Visual Studio Codeを起動し、左下の Extensionsをクリックし、左上
 ![img](./fig/vscode-1.png)
 
 * settings.json では以下のようにyaml.schemasの設定を入力します。
-  * 下記ではスキーマチェックを対象ファイルを \*xafs\*.yml としていますが、metadata\*.html など、利用状況に応じて適宜変更してください。
+  * **下記ではスキーマチェックを対象ファイルを \*xafs\*.yml としていますが、metadata\*.html など、利用状況に応じて適宜スキーマチェック対象ファイルを変更してください。**
+
+**データ型のチェックを行わない場合**
 
 ```
 {
@@ -32,6 +34,25 @@ Visual Studio Codeを起動し、左下の Extensionsをクリックし、左上
     }
 }
 ```
+
+**データ型のチェックを行う場合**
+
+```
+{
+    "yaml.schemas": {
+        "https://raw.githubusercontent.com/matumot/xafs-schema/main/draft/20221212/xafs-schema-strict.json": [
+            "*xafs*.yml"
+        ]
+    }
+}
+```
+
+上記で各スキーマファイルは以下の仕様になっています。
+
+| スキーマファイル        | 説明                                                         |
+| ----------------------- | ------------------------------------------------------------ |
+| xafs-schema.json        | データ型のチェックは緩くなっています。 (数値・文字列の区別なし、空欄もOK) |
+| xafs-schema-strict.json | データ型のチェックも行います。 標準試料データなど信頼度の高いデータに対してはこちらのスキーマ利用を推奨します。 |
 
 
 

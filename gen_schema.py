@@ -24,7 +24,7 @@ logger.propagate = False
 
 class G:
     schema_file = 'xafs-schema.json'
-    schema_file_none_ok = 'xafs-schema-none-ok.json'
+    schema_file_strict = 'xafs-schema-strict.json'
 
 
 def dump_json(out_dict, filename, debug=False):
@@ -120,7 +120,7 @@ def get_key_base_and_child(key, flag_flat_key=False):
     return key_base, key_child
 
 
-def get_items_from_sheet(sheet, flag_null_allowed=False):
+def get_items_from_sheet(sheet, flag_strict=False):
     """
     utility function (エクセルシートからアイテム取得)
     """
@@ -151,35 +151,45 @@ def get_items_from_sheet(sheet, flag_null_allowed=False):
         data_type = sheet.cell(row=i, column=col_data_type).value
         data_type_converted = convert_type(data_type)
         if data_type_converted is not None:
+      
+            if flag_strict:
 
-            if flag_null_allowed:
-                if data_type_converted in ["array"]:
+                if data_type != "date":
                     each_dict["type"] = data_type_converted
                 else:
-                    each_dict["oneOf"] = [{"type": data_type_converted},
-                                          {"type": "null"}]
-            else:
-                each_dict["type"] = data_type_converted
+                    each_dict["anyOf"] = [{"type": "string",
+                                          "pattern":  "^\d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])( ([01][0-9]|2[0-3]):[0-5][0-9](:[0-5][0-9])?)?$"},
+                                          {"type": "string", "format": "date"},
+                                          {"type": "string", "format": "date-time"}]
 
-            if data_type in ["keyword", "text"]:
-                data_type = "string"
-            each_dict["type_db"] = data_type
-            if data_type == "date":
-                #              each_dict["format"] = "date-time"
-                each_dict["pattern"] = "^\d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])( ([01][0-9]|2[0-3]):[0-5][0-9](:[0-5][0-9])?)?$"
+            else:
+                if data_type_converted in ["array"]:
+                    each_dict["type"] = data_type_converted
+                elif data_type != "date":
+                    each_dict["type"] = ["string","number","null"]
+                else:
+                    each_dict["anyOf"] = [{"type": "string",
+                                          "pattern":  "^\d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])( ([01][0-9]|2[0-3]):[0-5][0-9](:[0-5][0-9])?)?$"},
+                                          {"type": "string", "format": "date"},
+                                          {"type": "string", "format": "date-time"},
+                                          {"type": "null"}]
+
 
         # ... check description
         value_ja = sheet.cell(row=i, column=col_desc_ja).value
         value = sheet.cell(row=i, column=col_desc).value
-        supplement = sheet.cell(row=i, column=col_supplement).value
+        supplement_value = sheet.cell(row=i, column=col_supplement).value
+        enum_value = sheet.cell(row=i, column=col_enum).value
         if value_ja or value:
             if value_ja is None:
                 value_ja = ""
             if value is None:
                 value = ""
             description = "{}\n{}".format(value_ja, value)
-            if supplement is not None:
-                description += "\nSupplement: {}".format(supplement)
+            if supplement_value is not None:
+                description += "\nSupplement:\n{}".format(supplement_value)
+            if enum_value is not None:
+                description += "\nEnum:\n{}".format(enum_value)            
 
             each_dict["description"] = description
 
@@ -342,7 +352,7 @@ def get_items(items_dict, required_dict, flag_flat_key=False):
     return items_all_dict
 
 
-def get_schema(filename_input, flag_required=True, flag_flat_key=False, flag_null_allowed=False):
+def get_schema(filename_input, flag_required=True, flag_flat_key=False, flag_strict=False):
     """
     エクセル形式のメタデータスキーマより jsonschemaを作成
 
@@ -350,7 +360,7 @@ def get_schema(filename_input, flag_required=True, flag_flat_key=False, flag_nul
         filename_input (str): _description_
         flag_required (bool, optional): required オプションを有効化フラグ. Defaults to True.
         flag_flat_key (bool, optional): BENTEN形式のメタデータ(flat構造)の有効化フラグ. Defaults to False.
-        flag_null_allowed (bool, optional): null入力の有効化フラグ. Defaults to False.
+        flag_strict (bool, optional): データ型チェックの有効化フラグ. Defaults to False.
 
     Returns:
         disct: jsonshemaの辞書
@@ -366,7 +376,7 @@ def get_schema(filename_input, flag_required=True, flag_flat_key=False, flag_nul
             continue
 
         deepupdate(items_dict, get_items_from_sheet(
-            wb[sheet_name], flag_null_allowed=flag_null_allowed))
+            wb[sheet_name], flag_strict=flag_strict))
 
         if flag_required:
             deepupdate(required_dict, get_required_from_sheet(wb[sheet_name],
@@ -402,15 +412,15 @@ if __name__ == "__main__":
     flag_required = True
 
     schema_dict_strict = get_schema(schema_excel_filename,
-                                    flag_required=flag_required, flag_null_allowed=False)
+                                    flag_required=flag_required, flag_strict=False)
     filename_schema = f'{output_dir}/{G.schema_file}'
     logger.info(f'... output {filename_schema}')
 
     dump_json(schema_dict_strict, filename_schema)
 
     schema_dict = get_schema(schema_excel_filename,
-                             flag_required=flag_required, flag_null_allowed=True)
-    filename_schema = f'{output_dir}/{G.schema_file_none_ok}'
+                             flag_required=flag_required, flag_strict=True)
+    filename_schema = f'{output_dir}/{G.schema_file_strict}'
 
     logger.info(f'... output {filename_schema}')
 

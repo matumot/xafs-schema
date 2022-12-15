@@ -131,7 +131,7 @@
         },
         "@data_info@data_depositor@role":{
             "$id":"#key/@data_info@data_depositor@role",
-            "description":"データ登録者の役割\nrole of data depositor\nSupplement: analyst, manager, director",
+            "description":"データ登録者の役割\nrole of data depositor\nSupplement:\nanalyst, manager, director\nEnum:\nanalyst, manager, director",
             "title":"@data_info@data_depositor@role",
             "examples":[
                 "analyst"
@@ -193,7 +193,7 @@
         },
         "@data_info@contact_name@role":{
             "$id":"#key/@data_info@contact_name@role",
-            "description":"データ責任者の役割\nrole of data contact name\nSupplement: contractor, principal investigator, head of the institution,responsible",
+            "description":"データ責任者の役割\nrole of data contact name\nSupplement:\ncontractor, principal investigator, head of the institution,responsible\nEnum:\ncontractor, principal investigator, head of the institution,responsible",
             "title":"@data_info@contact_name@role",
             "examples":[
                 "responsible"
@@ -207,7 +207,7 @@
         },
         "@data_info@access_rights":{
             "$id":"#key/@data_info@access_rights",
-            "description":"アクセス権限\naccess rights\nSupplement: open または close (未入力の場合はclose)",
+            "description":"アクセス権限\naccess rights\nSupplement:\nopen または close (未入力の場合はclose)\nEnum:\nopen,close",
             "title":"@data_info@access_rights",
             "examples":[
                 "open"
@@ -245,25 +245,56 @@
         },
         "@data_info@deposite_date@create_time":{
             "$id":"#key/@data_info@deposite_date@create_time",
-            "type":"string",
-            "type_db":"date",
-            "pattern":"^\\d{4}\\-(0?[1-9]|1[012])\\-(0?[1-9]|[12][0-9]|3[01])( ([01][0-9]|2[0-3]):[0-5][0-9](:[0-5][0-9])?)?$",
+            "anyOf":[
+                {
+                    "type":"string",
+                    "pattern":"^\\d{4}\\-(0?[1-9]|1[012])\\-(0?[1-9]|[12][0-9]|3[01])( ([01][0-9]|2[0-3]):[0-5][0-9](:[0-5][0-9])?)?$"
+                },
+                {
+                    "type":"string",
+                    "format":"date"
+                },
+                {
+                    "type":"string",
+                    "format":"date-time"
+                },
+                {
+                    "type":"null"
+                }
+            ],
             "description":"データ登録の生成日時\ncreate datetime of data deposite",
             "title":"@data_info@deposite_date@create_time"
         },
         "@data_info@deposite_date@update_time":{
             "$id":"#key/@data_info@deposite_date@update_time",
-            "type":"string",
-            "type_db":"date",
-            "pattern":"^\\d{4}\\-(0?[1-9]|1[012])\\-(0?[1-9]|[12][0-9]|3[01])( ([01][0-9]|2[0-3]):[0-5][0-9](:[0-5][0-9])?)?$",
+            "anyOf":[
+                {
+                    "type":"string",
+                    "pattern":"^\\d{4}\\-(0?[1-9]|1[012])\\-(0?[1-9]|[12][0-9]|3[01])( ([01][0-9]|2[0-3]):[0-5][0-9](:[0-5][0-9])?)?$"
+                },
+                {
+                    "type":"string",
+                    "format":"date"
+                },
+                {
+                    "type":"string",
+                    "format":"date-time"
+                },
+                {
+                    "type":"null"
+                }
+            ],
             "description":"データ登録の更新日時\nupdate datetime of data deposite",
             "title":"@data_info@deposite_date@update_time"
         },
         "@data_info@title":{
             "$id":"#key/@data_info@title",
-            "type":"string",
-            "type_db":"string",
-            "description":"データセットの題名(英語)\ntitle of work (english)\nSupplement: 課題番号(英語)など",
+            "type":[
+                "string",
+                "number",
+                "null"
+            ],
+            "description":"データセットの題名(英語)\ntitle of work (english)\nSupplement:\n課題番号(英語)など",
             "title":"@data_info@title",
             "examples":[
                 "XAFS measurement of Cu"
@@ -271,9 +302,12 @@
         },
         "@data_info@title_ja":{
             "$id":"#key/@data_info@title_ja",
-            "type":"string",
-            "type_db":"string",
-            "description":"データセットの題名(日本語)\ntitle of work (japanses)\nSupplement: 課題番号(日本語)など",
+            "type":[
+                "string",
+                "number",
+                "null"
+            ],
+            "description":"データセットの題名(日本語)\ntitle of work (japanses)\nSupplement:\n課題番号(日本語)など",
             "title":"@data_info@title_ja",
             "examples":[
                 "CuのXAFS測定"
@@ -298,9 +332,12 @@
         },
         "@data_info@identifier@pid":{
             "$id":"#key/@data_info@identifier@pid",
-            "type":"string",
-            "type_db":"string",
-            "description":"PID番号\nPersistent ID\nSupplement: データ登録毎にユニークな値,  facility-specific",
+            "type":[
+                "string",
+                "number",
+                "null"
+            ],
+            "description":"PID番号\nPersistent ID\nSupplement:\nデータ登録毎にユニークな値,  facility-specific",
             "title":"@data_info@identifier@pid",
             "examples":[
                 " spring8.7e55cc2d-e93e-421f-8d71-6d4bfe9cc339"
@@ -308,7 +345,7 @@
         },
         "@data_info@identifier@proposal_number":{
             "$id":"#key/@data_info@identifier@proposal_number",
-            "description":"課題番号\nproposal number\nSupplement: facility-specific, Proposal No. etc.",
+            "description":"課題番号\nproposal number\nSupplement:\nfacility-specific, Proposal No. etc.",
             "title":"@data_info@identifier@proposal_number",
             "examples":[
                 "2014S0000"
@@ -406,8 +443,11 @@
         },
         "@facility@ring@energy":{
             "$id":"#key/@facility@ring@energy",
-            "type":"number",
-            "type_db":"double",
+            "type":[
+                "string",
+                "number",
+                "null"
+            ],
             "description":"ビームエネルギー\nbeam energy",
             "title":"@facility@ring@energy",
             "examples":[
@@ -440,8 +480,11 @@
         },
         "@facility@ring@start_current":{
             "$id":"#key/@facility@ring@start_current",
-            "type":"number",
-            "type_db":"double",
+            "type":[
+                "string",
+                "number",
+                "null"
+            ],
             "description":"蓄積電流(開始時)\nbeam current (start)",
             "title":"@facility@ring@start_current",
             "examples":[
@@ -458,8 +501,11 @@
         },
         "@facility@ring@end_current":{
             "$id":"#key/@facility@ring@end_current",
-            "type":"number",
-            "type_db":"double",
+            "type":[
+                "string",
+                "number",
+                "null"
+            ],
             "description":"蓄積電流(終了時)\nbeam current (end)",
             "title":"@facility@ring@end_current"
         },
@@ -487,7 +533,7 @@
         },
         "@facility@light_source@type":{
             "$id":"#key/@facility@light_source@type",
-            "description":"光源の種類\nlight source type\nSupplement: BM,U,W",
+            "description":"光源の種類\nlight source type\nSupplement:\nBM,U,W\nEnum:\nBM,U,W",
             "title":"@facility@light_source@type",
             "examples":[
                 "BM"
@@ -509,7 +555,6 @@
         "@files":{
             "$id":"#key/@files",
             "type":"array",
-            "type_db":"array",
             "description":"ファイル配列\nfile array",
             "title":"@files",
             "items":{
@@ -567,8 +612,11 @@
         },
         "@files.headerlines":{
             "$id":"#key/@files.headerlines",
-            "type":"integer",
-            "type_db":"integer",
+            "type":[
+                "string",
+                "number",
+                "null"
+            ],
             "description":"データコラムまでの行数\nNumber of rows before measured data columns",
             "title":"@files.headerlines",
             "examples":[
@@ -578,7 +626,6 @@
         "@files.columns":{
             "$id":"#key/@files.columns",
             "type":"array",
-            "type_db":"array",
             "description":"データコラムの配列\ndata column array",
             "title":"@files.columns",
             "items":{
@@ -618,7 +665,7 @@
         },
         "@files.columns.column_type":{
             "$id":"#key/@files.columns.column_type",
-            "description":"コラムの種類 (raw,processed)\ncolumn type (raw,processed)\nSupplement: raw,processed",
+            "description":"コラムの種類 (raw,processed)\ncolumn type (raw,processed)\nSupplement:\nraw,processed\nEnum:\nraw,processed",
             "title":"@files.columns.column_type",
             "examples":[
                 "raw"
@@ -661,7 +708,7 @@
         },
         "@instrument@arrangement":{
             "$id":"#key/@instrument@arrangement",
-            "description":"装置の配置\narrange of instrument\nSupplement:  The order of notation is from upstream to downstream. Separator is defined as \"//\".",
+            "description":"装置の配置\narrange of instrument\nSupplement:\n The order of notation is from upstream to downstream. Separator is defined as \"//\".",
             "title":"@instrument@arrangement",
             "examples":[
                 "S1//M1//groove_entrance_slit//DCM//groove_exit_slit//S2"
@@ -703,8 +750,11 @@
         },
         "@instrument@monochromator@distance":{
             "$id":"#key/@instrument@monochromator@distance",
-            "type":"number",
-            "type_db":"double",
+            "type":[
+                "string",
+                "number",
+                "null"
+            ],
             "description":"分光器と光源間の距離 (施設依存)\ndistance of monochromator from light source (facility-specific)",
             "title":"@instrument@monochromator@distance",
             "examples":[
@@ -782,8 +832,11 @@
         },
         "@instrument@monochromator@detail@crystal_d":{
             "$id":"#key/@instrument@monochromator@detail@crystal_d",
-            "type":"number",
-            "type_db":"double",
+            "type":[
+                "string",
+                "number",
+                "null"
+            ],
             "description":"分光結晶面間隔\nmonochrometer distance",
             "title":"@instrument@monochromator@detail@crystal_d"
         },
@@ -794,8 +847,11 @@
         },
         "@instrument@monochromator@detail@groove_deviation_angle":{
             "$id":"#key/@instrument@monochromator@detail@groove_deviation_angle",
-            "type":"number",
-            "type_db":"double",
+            "type":[
+                "string",
+                "number",
+                "null"
+            ],
             "description":"\ngroove deviation angle",
             "title":"@instrument@monochromator@detail@groove_deviation_angle"
         },
@@ -806,8 +862,11 @@
         },
         "@instrument@monochromator@detail@groove_density":{
             "$id":"#key/@instrument@monochromator@detail@groove_density",
-            "type":"number",
-            "type_db":"double",
+            "type":[
+                "string",
+                "number",
+                "null"
+            ],
             "description":"\ngroove density",
             "title":"@instrument@monochromator@detail@groove_density"
         },
@@ -818,8 +877,11 @@
         },
         "@instrument@monochromator@detail@groove_depth":{
             "$id":"#key/@instrument@monochromator@detail@groove_depth",
-            "type":"number",
-            "type_db":"double",
+            "type":[
+                "string",
+                "number",
+                "null"
+            ],
             "description":"\ngroove depth",
             "title":"@instrument@monochromator@detail@groove_depth"
         },
@@ -842,7 +904,6 @@
         "@instrument@mirrors.mirror":{
             "$id":"#key/@instrument@mirrors.mirror",
             "type":"array",
-            "type_db":"array",
             "description":"ミラーのリスト\nmirror list",
             "title":"@instrument@mirrors.mirror",
             "items":{
@@ -889,8 +950,11 @@
         },
         "@instrument@mirrors.mirror.distance":{
             "$id":"#key/@instrument@mirrors.mirror.distance",
-            "type":"number",
-            "type_db":"double",
+            "type":[
+                "string",
+                "number",
+                "null"
+            ],
             "description":"ミラーの距離\ndistance of mirror",
             "title":"@instrument@mirrors.mirror.distance",
             "examples":[
@@ -920,8 +984,11 @@
         },
         "@instrument@mirrors.mirror.angle":{
             "$id":"#key/@instrument@mirrors.mirror.angle",
-            "type":"number",
-            "type_db":"double",
+            "type":[
+                "string",
+                "number",
+                "null"
+            ],
             "description":"ミラーの角度\nmirror angle",
             "title":"@instrument@mirrors.mirror.angle",
             "examples":[
@@ -966,7 +1033,6 @@
         "@instrument@filters.filter":{
             "$id":"#key/@instrument@filters.filter",
             "type":"array",
-            "type_db":"array",
             "description":"フィルターのリスト\nfilter list",
             "title":"@instrument@filters.filter",
             "items":{
@@ -1001,8 +1067,11 @@
         },
         "@instrument@filters.filter.distance":{
             "$id":"#key/@instrument@filters.filter.distance",
-            "type":"number",
-            "type_db":"double",
+            "type":[
+                "string",
+                "number",
+                "null"
+            ],
             "description":"フィルターの距離\nfilter distance",
             "title":"@instrument@filters.filter.distance",
             "examples":[
@@ -1044,7 +1113,6 @@
         "@instrument@slits.slit":{
             "$id":"#key/@instrument@slits.slit",
             "type":"array",
-            "type_db":"array",
             "description":"スリットのリスト\nlist for slit",
             "title":"@instrument@slits.slit",
             "items":{
@@ -1102,8 +1170,11 @@
         },
         "@instrument@slits.slit.distance":{
             "$id":"#key/@instrument@slits.slit.distance",
-            "type":"number",
-            "type_db":"double",
+            "type":[
+                "string",
+                "number",
+                "null"
+            ],
             "description":"スリットの距離\ndistance of slit",
             "title":"@instrument@slits.slit.distance",
             "examples":[
@@ -1120,8 +1191,11 @@
         },
         "@instrument@slits.slit.vertical_size":{
             "$id":"#key/@instrument@slits.slit.vertical_size",
-            "type":"number",
-            "type_db":"double",
+            "type":[
+                "string",
+                "number",
+                "null"
+            ],
             "description":"スリット垂直方向サイズ\nslit vertical size",
             "title":"@instrument@slits.slit.vertical_size",
             "examples":[
@@ -1138,8 +1212,11 @@
         },
         "@instrument@slits.slit.horizontal_size":{
             "$id":"#key/@instrument@slits.slit.horizontal_size",
-            "type":"number",
-            "type_db":"double",
+            "type":[
+                "string",
+                "number",
+                "null"
+            ],
             "description":"スリット平行方向サイズ\nslit horizontal size",
             "title":"@instrument@slits.slit.horizontal_size"
         },
@@ -1150,8 +1227,11 @@
         },
         "@instrument@slits.slit.diameter":{
             "$id":"#key/@instrument@slits.slit.diameter",
-            "type":"number",
-            "type_db":"double",
+            "type":[
+                "string",
+                "number",
+                "null"
+            ],
             "description":"スリット直径\nslit diameter",
             "title":"@instrument@slits.slit.diameter"
         },
@@ -1212,7 +1292,6 @@
         "@measurement@edges@edge":{
             "$id":"#key/@measurement@edges@edge",
             "type":"array",
-            "type_db":"array",
             "description":"吸収端配列\narray of absorption edge",
             "title":"@measurement@edges@edge",
             "items":{
@@ -1280,8 +1359,11 @@
         },
         "@measurement@I0@conversion_factor@value":{
             "$id":"#key/@measurement@I0@conversion_factor@value",
-            "type":"number",
-            "type_db":"double",
+            "type":[
+                "string",
+                "number",
+                "null"
+            ],
             "description":"I0: conversion factor from instrument output to photon counts\nI0: conversion factor from instrument output to photon counts",
             "title":"@measurement@I0@conversion_factor@value",
             "examples":[
@@ -1349,7 +1431,6 @@
         "@measurement@I0@detector@gases@gas":{
             "$id":"#key/@measurement@I0@detector@gases@gas",
             "type":"array",
-            "type_db":"array",
             "description":"I0: ガスの配列\nI0:  array of gas",
             "title":"@measurement@I0@detector@gases@gas",
             "items":{
@@ -1375,8 +1456,11 @@
         },
         "@measurement@I0@detector@gases@gas.proportion":{
             "$id":"#key/@measurement@I0@detector@gases@gas.proportion",
-            "type":"number",
-            "type_db":"double",
+            "type":[
+                "string",
+                "number",
+                "null"
+            ],
             "description":"I0: ガスの割合\nI0:  gas proportion",
             "title":"@measurement@I0@detector@gases@gas.proportion",
             "examples":[
@@ -1415,8 +1499,11 @@
         },
         "@measurement@I0@detector@applied_voltage@voltage":{
             "$id":"#key/@measurement@I0@detector@applied_voltage@voltage",
-            "type":"number",
-            "type_db":"double",
+            "type":[
+                "string",
+                "number",
+                "null"
+            ],
             "description":"I0:  検出器印加電圧\nI0: applied voltage of detector",
             "title":"@measurement@I0@detector@applied_voltage@voltage",
             "examples":[
@@ -1453,8 +1540,11 @@
         },
         "@measurement@I0@ammeters@gain":{
             "$id":"#key/@measurement@I0@ammeters@gain",
-            "type":"number",
-            "type_db":"double",
+            "type":[
+                "string",
+                "number",
+                "null"
+            ],
             "description":"I0:  電流計ゲイン\nI0: gain of ammeters",
             "title":"@measurement@I0@ammeters@gain",
             "examples":[
@@ -1493,7 +1583,6 @@
         "@measurement@detector":{
             "$id":"#key/@measurement@detector",
             "type":"array",
-            "type_db":"array",
             "description":"検出器の配列\ndetector array",
             "title":"@measurement@detector",
             "items":{
@@ -1583,8 +1672,11 @@
         },
         "@measurement@detector.hard-ware@gases@gas_number":{
             "$id":"#key/@measurement@detector.hard-ware@gases@gas_number",
-            "type":"integer",
-            "type_db":"integer",
+            "type":[
+                "string",
+                "number",
+                "null"
+            ],
             "description":"ICのガスの要素数\ngas number of IC",
             "title":"@measurement@detector.hard-ware@gases@gas_number",
             "examples":[
@@ -1594,7 +1686,6 @@
         "@measurement@detector.hard-ware@gases@gas":{
             "$id":"#key/@measurement@detector.hard-ware@gases@gas",
             "type":"array",
-            "type_db":"array",
             "description":"ICのガスのリスト\ngas list of IC",
             "title":"@measurement@detector.hard-ware@gases@gas",
             "items":{
@@ -1620,8 +1711,11 @@
         },
         "@measurement@detector.hard-ware@gases@gas.proportion":{
             "$id":"#key/@measurement@detector.hard-ware@gases@gas.proportion",
-            "type":"number",
-            "type_db":"double",
+            "type":[
+                "string",
+                "number",
+                "null"
+            ],
             "description":"ICのガスの割合\nproportion of IC gas",
             "title":"@measurement@detector.hard-ware@gases@gas.proportion",
             "examples":[
@@ -1644,8 +1738,11 @@
         },
         "@measurement@detector.hard-ware@applied_voltage@voltage":{
             "$id":"#key/@measurement@detector.hard-ware@applied_voltage@voltage",
-            "type":"number",
-            "type_db":"double",
+            "type":[
+                "string",
+                "number",
+                "null"
+            ],
             "description":"ICの印加電圧\napplied voltage of IC",
             "title":"@measurement@detector.hard-ware@applied_voltage@voltage",
             "examples":[
@@ -1663,7 +1760,6 @@
         "@measurement@detector.processing_lines":{
             "$id":"#key/@measurement@detector.processing_lines",
             "type":"array",
-            "type_db":"array",
             "description":"ICの processing lineの配列\narray of IC processing line",
             "title":"@measurement@detector.processing_lines",
             "items":{
@@ -1702,9 +1798,12 @@
         },
         "@measurement@detector.processing_lines.conversion_factor@value":{
             "$id":"#key/@measurement@detector.processing_lines.conversion_factor@value",
-            "type":"number",
-            "type_db":"double",
-            "description":"conversion factorの値\nconversion factor\nSupplement: Conversion from instrument output to photon counts (per line)",
+            "type":[
+                "string",
+                "number",
+                "null"
+            ],
+            "description":"conversion factorの値\nconversion factor\nSupplement:\nConversion from instrument output to photon counts (per line)",
             "title":"@measurement@detector.processing_lines.conversion_factor@value",
             "examples":[
                 100000000
@@ -1721,7 +1820,6 @@
         "@measurement@detector.processing_lines.processors":{
             "$id":"#key/@measurement@detector.processing_lines.processors",
             "type":"array",
-            "type_db":"array",
             "description":"processor の配列\naray or processor",
             "title":"@measurement@detector.processing_lines.processors",
             "items":{
@@ -1766,7 +1864,7 @@
         },
         "@measurement@detector.processing_lines.processors.processor":{
             "$id":"#key/@measurement@detector.processing_lines.processors.processor",
-            "description":"processor名\nprocessor\nSupplement: Module (processor) used in each step of signal processing",
+            "description":"processor名\nprocessor\nSupplement:\nModule (processor) used in each step of signal processing",
             "title":"@measurement@detector.processing_lines.processors.processor",
             "examples":[
                 "Current Amp."
@@ -1812,8 +1910,11 @@
         },
         "@measurement@detector.processing_lines.processors.gain@value":{
             "$id":"#key/@measurement@detector.processing_lines.processors.gain@value",
-            "type":"number",
-            "type_db":"double",
+            "type":[
+                "string",
+                "number",
+                "null"
+            ],
             "description":"processorのゲイン\ngain value or processor",
             "title":"@measurement@detector.processing_lines.processors.gain@value",
             "examples":[
@@ -1844,8 +1945,11 @@
         },
         "@measurement@detector.processing_lines.processors.time_constant@value":{
             "$id":"#key/@measurement@detector.processing_lines.processors.time_constant@value",
-            "type":"number",
-            "type_db":"double",
+            "type":[
+                "string",
+                "number",
+                "null"
+            ],
             "description":"processorの時定数\ntime constant of processor",
             "title":"@measurement@detector.processing_lines.processors.time_constant@value",
             "examples":[
@@ -1862,8 +1966,11 @@
         },
         "@measurement@detector.processing_lines.processors.unit_id":{
             "$id":"#key/@measurement@detector.processing_lines.processors.unit_id",
-            "type":"integer",
-            "type_db":"integer",
+            "type":[
+                "string",
+                "number",
+                "null"
+            ],
             "description":"processorのunit id\nunit id of processor",
             "title":"@measurement@detector.processing_lines.processors.unit_id",
             "examples":[
@@ -1909,8 +2016,11 @@
         },
         "@measurement@detector.processing_lines.processors.shaping_parameters@peaking_time@value":{
             "$id":"#key/@measurement@detector.processing_lines.processors.shaping_parameters@peaking_time@value",
-            "type":"number",
-            "type_db":"double",
+            "type":[
+                "string",
+                "number",
+                "null"
+            ],
             "description":"\npeaking time of shaping parameters",
             "title":"@measurement@detector.processing_lines.processors.shaping_parameters@peaking_time@value",
             "examples":[
@@ -1941,8 +2051,11 @@
         },
         "@measurement@detector.processing_lines.processors.shaping_parameters@through_rate@value":{
             "$id":"#key/@measurement@detector.processing_lines.processors.shaping_parameters@through_rate@value",
-            "type":"number",
-            "type_db":"double",
+            "type":[
+                "string",
+                "number",
+                "null"
+            ],
             "description":"\nthrough rate of shaping parameters",
             "title":"@measurement@detector.processing_lines.processors.shaping_parameters@through_rate@value",
             "examples":[
@@ -1973,8 +2086,11 @@
         },
         "@measurement@detector.processing_lines.processors.shaping_parameters@rising_time@value":{
             "$id":"#key/@measurement@detector.processing_lines.processors.shaping_parameters@rising_time@value",
-            "type":"number",
-            "type_db":"double",
+            "type":[
+                "string",
+                "number",
+                "null"
+            ],
             "description":"\nrising time of shaping parameters",
             "title":"@measurement@detector.processing_lines.processors.shaping_parameters@rising_time@value"
         },
@@ -1999,8 +2115,11 @@
         },
         "@measurement@detector.processing_lines.processors.shaping_parameters@fast_process_peaking_time@value":{
             "$id":"#key/@measurement@detector.processing_lines.processors.shaping_parameters@fast_process_peaking_time@value",
-            "type":"number",
-            "type_db":"double",
+            "type":[
+                "string",
+                "number",
+                "null"
+            ],
             "description":"\nfast process peaking time  of shaping parameters",
             "title":"@measurement@detector.processing_lines.processors.shaping_parameters@fast_process_peaking_time@value"
         },
@@ -2025,8 +2144,11 @@
         },
         "@measurement@detector.processing_lines.processors.shaping_parameters@slow_process_peaking_time@value":{
             "$id":"#key/@measurement@detector.processing_lines.processors.shaping_parameters@slow_process_peaking_time@value",
-            "type":"number",
-            "type_db":"double",
+            "type":[
+                "string",
+                "number",
+                "null"
+            ],
             "description":"\nslow process peaking time  of shaping parameters",
             "title":"@measurement@detector.processing_lines.processors.shaping_parameters@slow_process_peaking_time@value"
         },
@@ -2054,15 +2176,21 @@
         },
         "@measurement@detector.processing_lines.processors.ROI@lower_limit":{
             "$id":"#key/@measurement@detector.processing_lines.processors.ROI@lower_limit",
-            "type":"number",
-            "type_db":"double",
+            "type":[
+                "string",
+                "number",
+                "null"
+            ],
             "description":"\nROI lower limit",
             "title":"@measurement@detector.processing_lines.processors.ROI@lower_limit"
         },
         "@measurement@detector.processing_lines.processors.ROI@upper_limit":{
             "$id":"#key/@measurement@detector.processing_lines.processors.ROI@upper_limit",
-            "type":"number",
-            "type_db":"double",
+            "type":[
+                "string",
+                "number",
+                "null"
+            ],
             "description":"\nROI upper limit",
             "title":"@measurement@detector.processing_lines.processors.ROI@upper_limit"
         },
@@ -2090,8 +2218,11 @@
         },
         "@measurement@detector.processing_lines.processors.deadtime@value":{
             "$id":"#key/@measurement@detector.processing_lines.processors.deadtime@value",
-            "type":"number",
-            "type_db":"double",
+            "type":[
+                "string",
+                "number",
+                "null"
+            ],
             "description":"\ndeadtime",
             "title":"@measurement@detector.processing_lines.processors.deadtime@value"
         },
@@ -2116,8 +2247,11 @@
         },
         "@measurement@detector.processing_lines.processors.deadtime@set_at@energy":{
             "$id":"#key/@measurement@detector.processing_lines.processors.deadtime@set_at@energy",
-            "type":"number",
-            "type_db":"double",
+            "type":[
+                "string",
+                "number",
+                "null"
+            ],
             "description":"deadtime の設定エネルギー\nset energy of deadtime",
             "title":"@measurement@detector.processing_lines.processors.deadtime@set_at@energy"
         },
@@ -2142,8 +2276,11 @@
         },
         "@measurement@detector.processing_lines.processors.full_scale@value":{
             "$id":"#key/@measurement@detector.processing_lines.processors.full_scale@value",
-            "type":"number",
-            "type_db":"double",
+            "type":[
+                "string",
+                "number",
+                "null"
+            ],
             "description":"full scale\nfull scale",
             "title":"@measurement@detector.processing_lines.processors.full_scale@value"
         },
@@ -2154,17 +2291,45 @@
         },
         "@measurement@start_time":{
             "$id":"#key/@measurement@start_time",
-            "type":"string",
-            "type_db":"date",
-            "pattern":"^\\d{4}\\-(0?[1-9]|1[012])\\-(0?[1-9]|[12][0-9]|3[01])( ([01][0-9]|2[0-3]):[0-5][0-9](:[0-5][0-9])?)?$",
+            "anyOf":[
+                {
+                    "type":"string",
+                    "pattern":"^\\d{4}\\-(0?[1-9]|1[012])\\-(0?[1-9]|[12][0-9]|3[01])( ([01][0-9]|2[0-3]):[0-5][0-9](:[0-5][0-9])?)?$"
+                },
+                {
+                    "type":"string",
+                    "format":"date"
+                },
+                {
+                    "type":"string",
+                    "format":"date-time"
+                },
+                {
+                    "type":"null"
+                }
+            ],
             "description":"計測開始時刻\nstart time of measurement",
             "title":"@measurement@start_time"
         },
         "@measurement@end_time":{
             "$id":"#key/@measurement@end_time",
-            "type":"string",
-            "type_db":"date",
-            "pattern":"^\\d{4}\\-(0?[1-9]|1[012])\\-(0?[1-9]|[12][0-9]|3[01])( ([01][0-9]|2[0-3]):[0-5][0-9](:[0-5][0-9])?)?$",
+            "anyOf":[
+                {
+                    "type":"string",
+                    "pattern":"^\\d{4}\\-(0?[1-9]|1[012])\\-(0?[1-9]|[12][0-9]|3[01])( ([01][0-9]|2[0-3]):[0-5][0-9](:[0-5][0-9])?)?$"
+                },
+                {
+                    "type":"string",
+                    "format":"date"
+                },
+                {
+                    "type":"string",
+                    "format":"date-time"
+                },
+                {
+                    "type":"null"
+                }
+            ],
             "description":"計測終了時刻\nend time of masurement",
             "title":"@measurement@end_time"
         },
@@ -2200,8 +2365,11 @@
         },
         "@measurement@energy_calibration@energy":{
             "$id":"#key/@measurement@energy_calibration@energy",
-            "type":"number",
-            "type_db":"double",
+            "type":[
+                "string",
+                "number",
+                "null"
+            ],
             "description":"\nenergy used for energy calibration",
             "title":"@measurement@energy_calibration@energy"
         },
@@ -2246,8 +2414,11 @@
         },
         "@measurement@tune@tune_angle":{
             "$id":"#key/@measurement@tune@tune_angle",
-            "type":"number",
-            "type_db":"double",
+            "type":[
+                "string",
+                "number",
+                "null"
+            ],
             "description":"\ntune angle",
             "title":"@measurement@tune@tune_angle"
         },
@@ -2258,8 +2429,11 @@
         },
         "@measurement@tune@tune_energy":{
             "$id":"#key/@measurement@tune@tune_energy",
-            "type":"number",
-            "type_db":"double",
+            "type":[
+                "string",
+                "number",
+                "null"
+            ],
             "description":"\ntune energy",
             "title":"@measurement@tune@tune_energy"
         },
@@ -2270,8 +2444,11 @@
         },
         "@measurement@tune@tune_ratio":{
             "$id":"#key/@measurement@tune@tune_ratio",
-            "type":"number",
-            "type_db":"double",
+            "type":[
+                "string",
+                "number",
+                "null"
+            ],
             "description":"\ntune ratio",
             "title":"@measurement@tune@tune_ratio"
         },
@@ -2296,8 +2473,11 @@
         },
         "@measurement@section@number":{
             "$id":"#key/@measurement@section@number",
-            "type":"integer",
-            "type_db":"integer",
+            "type":[
+                "string",
+                "number",
+                "null"
+            ],
             "description":"\nsection number",
             "title":"@measurement@section@number"
         },
@@ -2318,7 +2498,6 @@
         "@measurement@section@blocks@block":{
             "$id":"#key/@measurement@section@blocks@block",
             "type":"array",
-            "type_db":"array",
             "description":"\narrray of section block",
             "title":"@measurement@section@blocks@block",
             "items":{
@@ -2363,8 +2542,11 @@
         },
         "@measurement@section@blocks@block.start":{
             "$id":"#key/@measurement@section@blocks@block.start",
-            "type":"number",
-            "type_db":"double",
+            "type":[
+                "string",
+                "number",
+                "null"
+            ],
             "description":"\nstart value",
             "title":"@measurement@section@blocks@block.start"
         },
@@ -2375,8 +2557,11 @@
         },
         "@measurement@section@blocks@block.end":{
             "$id":"#key/@measurement@section@blocks@block.end",
-            "type":"number",
-            "type_db":"double",
+            "type":[
+                "string",
+                "number",
+                "null"
+            ],
             "description":"\nend value",
             "title":"@measurement@section@blocks@block.end"
         },
@@ -2387,8 +2572,11 @@
         },
         "@measurement@section@blocks@block.delta":{
             "$id":"#key/@measurement@section@blocks@block.delta",
-            "type":"number",
-            "type_db":"double",
+            "type":[
+                "string",
+                "number",
+                "null"
+            ],
             "description":"\ndelta",
             "title":"@measurement@section@blocks@block.delta"
         },
@@ -2399,8 +2587,11 @@
         },
         "@measurement@section@blocks@block.wait_time":{
             "$id":"#key/@measurement@section@blocks@block.wait_time",
-            "type":"number",
-            "type_db":"double",
+            "type":[
+                "string",
+                "number",
+                "null"
+            ],
             "description":"\nwait time",
             "title":"@measurement@section@blocks@block.wait_time"
         },
@@ -2411,8 +2602,11 @@
         },
         "@measurement@section@blocks@block.dwell_time":{
             "$id":"#key/@measurement@section@blocks@block.dwell_time",
-            "type":"number",
-            "type_db":"double",
+            "type":[
+                "string",
+                "number",
+                "null"
+            ],
             "description":"\ndwell time",
             "title":"@measurement@section@blocks@block.dwell_time"
         },
@@ -2423,15 +2617,21 @@
         },
         "@measurement@section@blocks@block.sampling_number":{
             "$id":"#key/@measurement@section@blocks@block.sampling_number",
-            "type":"integer",
-            "type_db":"integer",
+            "type":[
+                "string",
+                "number",
+                "null"
+            ],
             "description":"サンプリング数\nsamping number",
             "title":"@measurement@section@blocks@block.sampling_number"
         },
         "@measurement@section@blocks@data_points":{
             "$id":"#key/@measurement@section@blocks@data_points",
-            "type":"integer",
-            "type_db":"integer",
+            "type":[
+                "string",
+                "number",
+                "null"
+            ],
             "description":"データ数\ndata points",
             "title":"@measurement@section@blocks@data_points"
         },
@@ -2548,7 +2748,6 @@
         "@sample@identifier@global_identifiers":{
             "$id":"#key/@sample@identifier@global_identifiers",
             "type":"array",
-            "type_db":"array",
             "description":"サンプル識別子のリスト(グローバル)\nlist of sample global identifiers",
             "title":"@sample@identifier@global_identifiers",
             "items":{
@@ -2563,7 +2762,7 @@
         },
         "@sample@identifier@global_identifiers.global_identifier":{
             "$id":"#key/@sample@identifier@global_identifiers.global_identifier",
-            "description":"サンプル識別子 (グローバル)\nsample global identifier\nSupplement: IDs in well-known external databases",
+            "description":"サンプル識別子 (グローバル)\nsample global identifier\nSupplement:\nIDs in well-known external databases",
             "title":"@sample@identifier@global_identifiers.global_identifier",
             "examples":[
                 "CID:14814"
@@ -2571,7 +2770,7 @@
         },
         "@sample@identifier@local_identifier":{
             "$id":"#key/@sample@identifier@local_identifier",
-            "description":"サンプル識別子 (ローカル)\nsample local identifier\nSupplement: ID used in the experimental group",
+            "description":"サンプル識別子 (ローカル)\nsample local identifier\nSupplement:\nID used in the experimental group",
             "title":"@sample@identifier@local_identifier",
             "examples":[
                 "VO-00002"
@@ -2579,7 +2778,7 @@
         },
         "@sample@phase":{
             "$id":"#key/@sample@phase",
-            "description":"サンプルの相\nphase of sample\nSupplement: gas,solid,liquid,film",
+            "description":"サンプルの相\nphase of sample\nSupplement:\ngas,solid,liquid,film\nEnum:\ngas,solid,liquid,film",
             "title":"@sample@phase",
             "examples":[
                 "solid"
@@ -2640,7 +2839,7 @@
         },
         "@sample@shape@size@type":{
             "$id":"#key/@sample@shape@size@type",
-            "description":"サンプルサイズのタイプ\nsample size type\nSupplement: diameter,radius,thickness",
+            "description":"サンプルサイズのタイプ\nsample size type\nSupplement:\ndiameter,radius,thickness\nEnum:\ndiameter,radius,thickness",
             "title":"@sample@shape@size@type",
             "examples":[
                 "diameter"
@@ -2653,8 +2852,11 @@
         },
         "@sample@shape@size@value":{
             "$id":"#key/@sample@shape@size@value",
-            "type":"number",
-            "type_db":"double",
+            "type":[
+                "string",
+                "number",
+                "null"
+            ],
             "description":"サンプルサイズの値\nsample size value",
             "title":"@sample@shape@size@value",
             "examples":[
@@ -2780,7 +2982,6 @@
         "@reference@identifier@global_identifiers":{
             "$id":"#key/@reference@identifier@global_identifiers",
             "type":"array",
-            "type_db":"array",
             "description":"[Reference] サンプル識別子のリスト(グローバル)\n[Reference] list of sample global identifiers",
             "title":"@reference@identifier@global_identifiers",
             "items":{
@@ -2795,7 +2996,7 @@
         },
         "@reference@identifier@global_identifiers.global_identifier":{
             "$id":"#key/@reference@identifier@global_identifiers.global_identifier",
-            "description":"[Reference] サンプル識別子 (グローバル)\n[Reference] sample global identifier\nSupplement: IDs in well-known external databases",
+            "description":"[Reference] サンプル識別子 (グローバル)\n[Reference] sample global identifier\nSupplement:\nIDs in well-known external databases",
             "title":"@reference@identifier@global_identifiers.global_identifier",
             "examples":[
                 "SID:24861892"
@@ -2803,7 +3004,7 @@
         },
         "@reference@identifier@local_identifier":{
             "$id":"#key/@reference@identifier@local_identifier",
-            "description":"[Reference] サンプル識別子 (ローカル)\n[Reference] sample local identifier\nSupplement: ID used in the experimental group",
+            "description":"[Reference] サンプル識別子 (ローカル)\n[Reference] sample local identifier\nSupplement:\nID used in the experimental group",
             "title":"@reference@identifier@local_identifier",
             "examples":[
                 "V-00100"
@@ -2811,7 +3012,7 @@
         },
         "@reference@phase":{
             "$id":"#key/@reference@phase",
-            "description":"[Reference] サンプルの相\n[Reference] phase of sample\nSupplement: gas,solid,liquid,film",
+            "description":"[Reference] サンプルの相\n[Reference] phase of sample\nSupplement:\ngas,solid,liquid,film\nEnum:\ngas,solid,liquid,film",
             "title":"@reference@phase",
             "examples":[
                 "film"
@@ -2872,7 +3073,7 @@
         },
         "@reference@shape@size@type":{
             "$id":"#key/@reference@shape@size@type",
-            "description":"[Reference] サンプルサイズのタイプ\n[Reference] sample size type\nSupplement: diameter,radius,thickness",
+            "description":"[Reference] サンプルサイズのタイプ\n[Reference] sample size type\nSupplement:\ndiameter,radius,thickness\nEnum:\ndiameter,radius,thickness",
             "title":"@reference@shape@size@type",
             "examples":[
                 "diameter"
@@ -2885,8 +3086,11 @@
         },
         "@reference@shape@size@value":{
             "$id":"#key/@reference@shape@size@value",
-            "type":"number",
-            "type_db":"double",
+            "type":[
+                "string",
+                "number",
+                "null"
+            ],
             "description":"[Reference] サンプルサイズの値\n[Reference] sample size value",
             "title":"@reference@shape@size@value",
             "examples":[
@@ -2942,9 +3146,12 @@
         },
         "@conditions@temperature@value":{
             "$id":"#key/@conditions@temperature@value",
-            "type":"number",
-            "type_db":"double",
-            "description":"温度\ntemperature\nSupplement: Only temperature has key-value as a required field. Others are generalized by \"condition\"",
+            "type":[
+                "string",
+                "number",
+                "null"
+            ],
+            "description":"温度\ntemperature\nSupplement:\nOnly temperature has key-value as a required field. Others are generalized by \"condition\"",
             "title":"@conditions@temperature@value",
             "examples":[
                 300
@@ -2961,7 +3168,6 @@
         "@conditions@condition":{
             "$id":"#key/@conditions@condition",
             "type":"array",
-            "type_db":"array",
             "description":"コンディションリスト\nlist of condition",
             "title":"@conditions@condition",
             "items":{
@@ -2997,7 +3203,6 @@
         "@conditions@condition.types":{
             "$id":"#key/@conditions@condition.types",
             "type":"array",
-            "type_db":"array",
             "description":"コンディションタイプリスト\nlist of condition type",
             "title":"@conditions@condition.types",
             "items":{
@@ -3012,7 +3217,7 @@
         },
         "@conditions@condition.types.type":{
             "$id":"#key/@conditions@condition.types.type",
-            "description":"コンディションタイプ\ncondition type\nSupplement: atmosphere,voltage,current,coordinate,optical, thermal,mechanical,polarization",
+            "description":"コンディションタイプ\ncondition type\nSupplement:\natmosphere,voltage,current,coordinate,optical, thermal,mechanical,polarization\nEnum:\natmosphere,voltage,current,coordinate,optical, thermal,mechanical,polarization",
             "title":"@conditions@condition.types.type",
             "enum":[
                 "atmosphere",
