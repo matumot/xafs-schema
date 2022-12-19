@@ -169,7 +169,7 @@
         },
         "@data_info@contact_name@organization":{
             "$id":"#key/@data_info@contact_name@organization",
-            "description":"データ責任者の所属\norganization of data depositor",
+            "description":"データ責任者の組織\norganization of data depositor",
             "title":"@data_info@contact_name@organization",
             "examples":[
                 "Ritsumeikan"
@@ -177,7 +177,7 @@
         },
         "@data_info@contact_name@affiliation":{
             "$id":"#key/@data_info@contact_name@affiliation",
-            "description":"データ責任者の部署\ndepartment of data depositor",
+            "description":"データ責任者の所属\naffiliation of data depositor",
             "title":"@data_info@contact_name@affiliation",
             "examples":[
                 "Ritsumeikan SR center"
@@ -185,7 +185,7 @@
         },
         "@data_info@contact_name@name":{
             "$id":"#key/@data_info@contact_name@name",
-            "description":"データ責任者(組織名でもよい)\ncontact name (person or organization)",
+            "description":"データ責任者(所属名でもよい)\ncontact name (person or affiliation)",
             "title":"@data_info@contact_name@name",
             "examples":[
                 "Jiro Hokudai"
